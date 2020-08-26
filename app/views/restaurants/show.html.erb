@@ -15,5 +15,23 @@
   <%= @restaurant.stars %>
 </p>
 
+<!-- ul -->
+<ul class="list-group">
+  <% @restaurant.reviews.each do |review| %>
+    <li class="list-group-item">
+      <%= review.content %>
+      <%= link_to "Remove",
+                  review_path(review),
+                  method: :delete,
+                  data: { confirm: "Are you sure?" } %>
+    </li>
+  <% end %>
+</ul>
+
+
+<%= link_to "Leave a review", new_restaurant_review_path(@restaurant.id), class: "btn btn-primary" %>
+
+<br>
+
 <%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
 <%= link_to 'Back', restaurants_path %>

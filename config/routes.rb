@@ -7,5 +7,17 @@ Rails.application.routes.draw do
   # patch "/restaurants/:id", to: "restaurants#update" # update
   # delete "/restaurants/:id", to: "restaurants#destroy" #destroy
 
-  resources :restaurants
+  resources :restaurants do
+    resources :reviews, only: [:new, :create]
+
+    # "/restaurants" <---- collection
+    get "top", on: :collection
+
+    # "/restaurants/:id"
+    get "chef", on: :member # "/restaurants/:id/chef"
+  end
+
+  # resources(:reviews, { only: [:destroy] })
+  # resources(:reviews, only: [:destroy])
+  resources :reviews, only: [:destroy]
 end
